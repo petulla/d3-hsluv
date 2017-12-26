@@ -3,3 +3,7 @@
 build/
 node_modules
 npm-debug.log
+.npm
+.eslintcache
+
+changes.txt

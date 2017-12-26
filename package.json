@@ -22,13 +22,11 @@
     "url": "https://github.com/d3/d3-hsluv.git"
   },
   "dependencies": {
-    "d3-color": "1"
+    "d3-color": "^1.0.3"
   },
   "scripts": {
-    "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -g d3-color:d3 -n d3 -o build/d3-hsluv.js -- index.js",
-    "test": "tape 'test/**/*-test.js' && eslint index.js src test",
-    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-hsluv.js -c -m -o build/d3-hsluv.min.js",
-    "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3-hsluv/build/d3-hsluv.js d3-hsluv.v0.1.js && cp ../d3-hsluv/build/d3-hsluv.min.js d3-hsluv.v0.1.min.js && git add d3-hsluv.v0.1.js d3-hsluv.v0.1.min.js && git commit -m \"d3-hslv ${npm_package_version}\" && git push && cd - && zip -j build/d3-hsluv.zip -- LICENSE README.md build/d3-hsluv.js build/d3-hsluv.min.js"
+    "prepublish": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -g d3-color:d3 -n d3 -o build/d3-hsluv.js -- index.js",
+    "prepare": "node ./test.js"
   },
   "devDependencies": {
     "eslint": "3",
