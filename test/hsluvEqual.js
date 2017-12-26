@@ -1,15 +1,15 @@
 var tape = require("tape"),
     color = require("../");
 
-tape.Test.prototype.hcgEqual = function(actual, h, c, g, opacity) {
-  this._assert(actual instanceof color.hcg
-      && (isNaN(h) ? isNaN(actual.h) && actual.h !== actual.h : h - 1e-6 <= actual.h && actual.h <= h + 1e-6)
-      && (isNaN(c) ? isNaN(actual.c) && actual.c !== actual.c : c - 1e-6 <= actual.c && actual.c <= c + 1e-6)
-      && (isNaN(g) ? isNaN(actual.g) && actual.g !== actual.g : g - 1e-6 <= actual.g && actual.g <= g + 1e-6)
+tape.Test.prototype.hsluvEqual = function(actual, l, u, v, opacity) {
+  this._assert(actual instanceof color.hsluv
+      && (isNaN(l) ? isNaN(actual.l) && actual.l !== actual.l : l - 1e-6 <= actual.l && actual.l <= l + 1e-6)
+      && (isNaN(u) ? isNaN(actual.u) && actual.u !== actual.u : u - 1e-6 <= actual.u && actual.u <= u + 1e-6)
+      && (isNaN(v) ? isNaN(actual.v) && actual.v !== actual.v : v - 1e-6 <= actual.v && actual.v <= v + 1e-6)
       && (isNaN(opacity) ? isNaN(actual.opacity) && actual.opacity !== actual.opacity : actual.opacity === opacity), {
     message: "should be equal",
-    operator: "hcgEqual",
-    actual: [actual.h, actual.c, actual.g, actual.opacity],
-    expected: [h, c, g, opacity]
+    operator: "hsluvEqual",
+    actual: [actual.l, actual.u, actual.v, actual.opacity],
+    expected: [l, u, v, opacity]
   });
 };

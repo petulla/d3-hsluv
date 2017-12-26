@@ -28,9 +28,9 @@ tape("hsluv.toString() converts to RGB and formats as rgb(…) or rgba(…)", fu
   test.end();
 });
 
-tape("hsluv.toString() reflects h, s and l channel values and opacity", function(test) {
+tape("hsluv.toString() reflects l, u and v channel values and opacity", function(test) {
   var c = d3_hsluv.hsluv("#abc");
-  c.h += 10, c.c += 0.01, c.g -= 0.01, c.opacity = 0.4;
+  c.l += 10, c.u += 0.01, c.v -= 0.01, c.opacity = 0.4;
   test.equal(c + "", "rgba(166, 178, 202, 0.4)");
   test.end();
 });
@@ -62,7 +62,7 @@ tape("hsluv(h, c, g) does not wrap hue to [0,360)", function(test) {
   test.end();
 });
 
-tape("hsluv(h, c, g) does not clamp s and l channel values to [0,1]", function(test) {
+tape("hsluv(l, u, v) does not clamp u and v channel values to [0,1]", function(test) {
   test.hsluvEqual(d3_hsluv.hsluv(120, -0.1, 0.5), 120, -0.1, 0.5, 1);
   test.hsluvEqual(d3_hsluv.hsluv(120, 1.1, 0.5), 120, 1.1, 0.5, 1);
   test.hsluvEqual(d3_hsluv.hsluv(120, 0.2, -0.1), 120, 0.2, -0.1, 1);
@@ -70,24 +70,24 @@ tape("hsluv(h, c, g) does not clamp s and l channel values to [0,1]", function(t
   test.end();
 });
 
-tape("hsluv(h, c, g, opacity) does not clamp opacity to [0,1]", function(test) {
+tape("hsluv(l, u, v, opacity) does not clamp opacity to [0,1]", function(test) {
   test.hsluvEqual(d3_hsluv.hsluv(120, 0.1, 0.5, -0.2), 120, 0.1, 0.5, -0.2);
   test.hsluvEqual(d3_hsluv.hsluv(120, 0.9, 0.5, 1.2), 120, 0.9, 0.5, 1.2);
   test.end();
 });
 
-tape("hsluv(h, c, g) coerces channel values to numbers", function(test) {
+tape("hsluv(l, u, v) coerces channel values to numbers", function(test) {
   test.hsluvEqual(d3_hsluv.hsluv("120", ".4", ".5"), 120, 0.4, 0.5, 1);
   test.end();
 });
 
-tape("hsluv(h, c, g, opacity) coerces opacity to number", function(test) {
+tape("hsluv(l, u, v, opacity) coerces opacity to number", function(test) {
   test.hsluvEqual(d3_hsluv.hsluv(120, 0.1, 0.5, "0.2"), 120, 0.1, 0.5, 0.2);
   test.hsluvEqual(d3_hsluv.hsluv(120, 0.9, 0.5, "0.9"), 120, 0.9, 0.5, 0.9);
   test.end();
 });
 
-tape("hsluv(h, c, g) allows undefined channel values", function(test) {
+tape("hsluv(l, u, v) allows undefined channel values", function(test) {
   test.hsluvEqual(d3_hsluv.hsluv(undefined, NaN, "foo"), NaN, NaN, NaN, 1);
   test.hsluvEqual(d3_hsluv.hsluv(undefined, 0.4, 0.5), NaN, 0.4, 0.5, 1);
   test.hsluvEqual(d3_hsluv.hsluv(42, undefined, 0.5), 42, NaN, 0.5, 1);
@@ -95,20 +95,20 @@ tape("hsluv(h, c, g) allows undefined channel values", function(test) {
   test.end();
 });
 
-tape("hsluv(h, c, g, opacity) converts undefined opacity to 1", function(test) {
+tape("hsluv(l, u, v, opacity) converts undefined opacity to 1", function(test) {
   test.hsluvEqual(d3_hsluv.hsluv(10, 0.2, 0.3, null), 10, 0.2, 0.3, 1);
   test.hsluvEqual(d3_hsluv.hsluv(10, 0.2, 0.3, undefined), 10, 0.2, 0.3, 1);
   test.end();
 });
 
-tape("hsluv(h, c, g) preserves explicit hue, even for grays", function(test) {
+tape("hsluv(l, u, v) preserves explicit hue, even for grays", function(test) {
   test.hsluvEqual(d3_hsluv.hsluv(0, 0, 0), 0, 0, 0, 1);
   test.hsluvEqual(d3_hsluv.hsluv(42, 0, 0.5), 42, 0, 0.5, 1);
   test.hsluvEqual(d3_hsluv.hsluv(118, 0, 1), 118, 0, 1, 1);
   test.end();
 });
 
-tape("hsluv(h, c, g) preserves explicit saturation, even for white or black", function(test) {
+tape("hsluv(l, u, v) preserves explicit saturation, even for white or black", function(test) {
   test.hsluvEqual(d3_hsluv.hsluv(0, 0, 0), 0, 0, 0, 1);
   test.hsluvEqual(d3_hsluv.hsluv(0, 0.18, 0), 0, 0.18, 0, 1);
   test.hsluvEqual(d3_hsluv.hsluv(0, 0.42, 1), 0, 0.42, 1, 1);
@@ -135,7 +135,7 @@ tape("hsluv(hsluv) copies an hsluv color", function(test) {
   var c1 = d3_hsluv.hsluv("hsla(120, 30%, 50%, 0.4)"),
       c2 = d3_hsluv.hsluv(c1);
   test.hsluvEqual(c1, 120, 0.3, 0.5, 0.4);
-  c1.h = c1.c = c1.g = c1.opacity = 0;
+  c1.l = c1.u = c1.v = c1.opacity = 0;
   test.hsluvEqual(c1, 0, 0, 0, 0);
   test.hsluvEqual(c2, 120, 0.3, 0.5, 0.4);
   test.end();

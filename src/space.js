@@ -43,7 +43,7 @@ export function lchToHsluv(tuple) {
   if(L < 0.00000001) return [H,0,0];
   var max = maxChromaForLH(L,H);
   var S = C / max * 100;
-  return {h:H,s:S,l:L};
+  return {l:H,u:S,v:L};
 };
 
 export function luvToLch(tuple) {
@@ -82,7 +82,8 @@ export function xyzToLuv(tuple) {
 };
 
 export function xyzToRgb(tuple) {
-  return [fromLinear(dotProduct(m[0],tuple)),fromLinear(dotProduct(m[1],tuple)),fromLinear(dotProduct(m[2],tuple))];  
+  var RGB = [fromLinear(dotProduct(m[0],tuple)),fromLinear(dotProduct(m[1],tuple)),fromLinear(dotProduct(m[2],tuple))];  
+  return {r: RGB[0], g: RGB[1], b: RGB[2]};
 }
 
 export function rgbToXyz(tuple) {
