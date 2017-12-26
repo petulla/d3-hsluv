@@ -8,6 +8,10 @@ export function yToL(Y) {
   if(Y <= epsilon) return Y / refY * kappa; else return 116 * Math.pow(Y / refY,0.333333333333333315) - 16;
 };
 
+export function lToY(L) {
+    if(L <= 8) return refY * L / kappa; else return refY * Math.pow((L + 16) / 116,3);
+}
+
 export function getBounds(L) {
   var result = [];
   var sub1 = Math.pow(L + 16,3) / 1560896;
@@ -58,4 +62,8 @@ export function dotProduct(a,b) {
 
 export function toLinear(c) {
   if(c > 0.04045) return Math.pow((c + 0.055) / 1.055,2.4); else return c / 12.92;
+}
+
+export function fromLinear(c) {
+    if(c <= 0.0031308) return 12.92 * c; else return 1.055 * Math.pow(c,0.416666666666666685) - 0.055;
 }

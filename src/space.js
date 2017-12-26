@@ -1,5 +1,39 @@
-import {minv, refU, refV} from './constant';
-import {toLinear, dotProduct, yToL, maxChromaForLH} from './helpers';
+import {m, minv, refU, refV} from './constant';
+import {fromLinear, toLinear, dotProduct, lToY, yToL, maxChromaForLH} from './helpers';
+
+export function luvToXyz(tuple) {
+  var L = tuple[0];
+  var U = tuple[1];
+  var V = tuple[2];
+  if(L == 0) return [0,0,0];
+  var varU = U / (13 * L) + refU;
+  var varV = V / (13 * L) + refV;
+  var Y = lToY(L);
+  var X = 0 - 9 * Y * varU / ((varU - 4) * varV - varU * varV);
+  var Z = (9 * Y - 15 * varV * Y - varV * X) / (3 * varV);
+  return [X,Y,Z];
+};
+
+export function lchToLuv (tuple) {
+  var L = tuple[0];
+  var C = tuple[1];
+  var H = tuple[2];
+  var Hrad = H / 360.0 * 2 * Math.PI;
+  var U = Math.cos(Hrad) * C;
+  var V = Math.sin(Hrad) * C;
+  return [L,U,V];
+};
+
+export function hsluvToLch (tuple) {
+  var H = tuple[0];
+  var S = tuple[1];
+  var L = tuple[2];
+  if(L > 99.9999999) return [100,0,H];
+  if(L < 0.00000001) return [0,0,H];
+  var max = maxChromaForLH(L,H);
+  var C = max / 100 * S;
+  return [L,C,H];
+};
 
 export function lchToHsluv(tuple) {
   var L = tuple[0];
@@ -46,6 +80,10 @@ export function xyzToLuv(tuple) {
   var V = 13 * L * (varV - refV);
   return [L,U,V];
 };
+
+export function xyzToRgb(tuple) {
+  return [fromLinear(dotProduct(m[0],tuple)),fromLinear(dotProduct(m[1],tuple)),fromLinear(dotProduct(m[2],tuple))];  
+}
 
 export function rgbToXyz(tuple) {
   var rgbl = [toLinear(tuple[0]),toLinear(tuple[1]),toLinear(tuple[2])];
