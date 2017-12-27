@@ -12,7 +12,7 @@ If you use NPM, `npm install d3-hsluv`. Otherwise, download the [latest release]
 <script src="https://d3js.org/d3-hsluv.v0.1.min.js"></script>
 <script>
 
-var yellow = d3.hsluv("yellow"); // {h: 60, s: 1, v: 1, opacity: 1}
+var yellow = d3.hsluv("yellow"); // {l: 60, u: 1, v: 1, opacity: 1}
 
 </script>
 ```
