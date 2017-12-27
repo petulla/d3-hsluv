@@ -21,7 +21,7 @@ var yellow = d3.hsluv("yellow"); // {l: 60, u: 1, v: 1, opacity: 1}
 
 ## API Reference
 
-<a name="hsluv" href="#hsluv">#</a> d3.<b>hsluv</b>(<i>h</i>, <i>s</i>, <i>v</i>[, <i>opacity</i>])<br>
+<a name="hsluv" href="#hsluv">#</a> d3.<b>hsluv</b>(<i>l</i>, <i>u</i>, <i>v</i>[, <i>opacity</i>])<br>
 <a href="#hsluv">#</a> d3.<b>hsluv</b>(<i>specifier</i>)<br>
 <a href="#hsluv">#</a> d3.<b>hsluv</b>(<i>color</i>)<br>
 
