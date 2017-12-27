@@ -5,3 +5,5 @@ export var refU = 0.19783000664283;
 export var refV = 0.46831999493879;
 export var kappa = 903.2962962;
 export var epsilon = 0.0088564516;
+export var darker = 0.7;
+export var brighter = 1 / darker;

@@ -12,17 +12,17 @@ export function luvToXyz(tuple) {
   var X = 0 - 9 * Y * varU / ((varU - 4) * varV - varU * varV);
   var Z = (9 * Y - 15 * varV * Y - varV * X) / (3 * varV);
   return [X,Y,Z];
-};
+}
 
 export function lchToLuv (tuple) {
   var L = tuple[0];
   var C = tuple[1];
   var H = tuple[2];
-  var Hrad = H / 360.0 * 2 * Math.PI;
+  var Hrad = H / 360 * 2 * Math.PI;
   var U = Math.cos(Hrad) * C;
   var V = Math.sin(Hrad) * C;
   return [L,U,V];
-};
+}
 
 export function hsluvToLch (tuple) {
   var H = tuple[0];
@@ -33,18 +33,18 @@ export function hsluvToLch (tuple) {
   var max = maxChromaForLH(L,H);
   var C = max / 100 * S;
   return [L,C,H];
-};
+}
 
 export function lchToHsluv(tuple) {
   var L = tuple[0];
   var C = tuple[1];
   var H = tuple[2];
-  if(L > 99.9999999) return [H,0,100];
-  if(L < 0.00000001) return [H,0,0];
+  if(L > 99.9999999) return {l:H,u:0,v:100};
+  if(L < 0.00000001) return {l:H,u:0,v:0};
   var max = maxChromaForLH(L,H);
   var S = C / max * 100;
   return {l:H,u:S,v:L};
-};
+}
 
 export function luvToLch(tuple) {
   var L = tuple[0];
@@ -54,11 +54,11 @@ export function luvToLch(tuple) {
   var H;
   if(C < 0.00000001) H = 0; else {
     var Hrad = Math.atan2(V,U);
-    H = Hrad * 180.0 / 3.1415926535897932;
+    H = Hrad * 180 / Math.PI;
     if(H < 0) H = 360 + H;
   }
   return [L,C,H];
-};
+}
 
 export function xyzToLuv(tuple) {
   var X = tuple[0];
@@ -79,7 +79,7 @@ export function xyzToLuv(tuple) {
   var U = 13 * L * (varU - refU);
   var V = 13 * L * (varV - refV);
   return [L,U,V];
-};
+}
 
 export function xyzToRgb(tuple) {
   var RGB = [fromLinear(dotProduct(m[0],tuple)),fromLinear(dotProduct(m[1],tuple)),fromLinear(dotProduct(m[2],tuple))];  
@@ -89,4 +89,4 @@ export function xyzToRgb(tuple) {
 export function rgbToXyz(tuple) {
   var rgbl = [toLinear(tuple[0]),toLinear(tuple[1]),toLinear(tuple[2])];
   return [dotProduct(minv[0],rgbl), dotProduct(minv[1],rgbl),dotProduct(minv[2],rgbl)];
-};
+}

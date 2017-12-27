@@ -2,11 +2,11 @@ import {m, refY, kappa, epsilon} from './constant';
 
 export function lengthOfRayUntilIntersect(theta,line) {
   return line.intercept / (Math.sin(theta) - line.slope * Math.cos(theta));
-};
+}
 
 export function yToL(Y) {
   if(Y <= epsilon) return Y / refY * kappa; else return 116 * Math.pow(Y / refY,0.333333333333333315) - 16;
-};
+}
 
 export function lToY(L) {
     if(L <= 8) return refY * L / kappa; else return refY * Math.pow((L + 16) / 116,3);
@@ -33,7 +33,7 @@ export function getBounds(L) {
     }
   }
   return result;
-};
+}
 
 export function maxChromaForLH(L,H) {
   var hrad = H / 360 * Math.PI * 2;
@@ -47,7 +47,7 @@ export function maxChromaForLH(L,H) {
     if(length >= 0) min = Math.min(min,length);
   }
   return min;
-};
+}
 
 export function dotProduct(a,b) {
   var sum = 0;
@@ -58,7 +58,7 @@ export function dotProduct(a,b) {
     sum += a[i] * b[i];
   }
   return sum;
-};
+}
 
 export function toLinear(c) {
   if(c > 0.04045) return Math.pow((c + 0.055) / 1.055,2.4); else return c / 12.92;

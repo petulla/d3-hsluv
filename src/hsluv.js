@@ -1,14 +1,16 @@
 import {color, rgb} from "d3-color";
 import {xyzToLuv, rgbToXyz, lchToHsluv, luvToLch, xyzToRgb, luvToXyz, lchToLuv, hsluvToLch} from "./space";
+import {brighter, darker} from './constant';
 
 function HsluvConvert(o) {
   if (o instanceof Hsluv) return new Hsluv(o.l, o.u, o.v, o.opacity);
   if (!(o instanceof rgb)) o = rgb(o);
 
-  var oRGB = lchToHsluv(luvToLch(xyzToLuv(rgbToXyz([o.r/255,o.g/255,o.b/255])))),
-      l = oRGB.l,
-      u = oRGB.u,
-      v = oRGB.v;
+  var oRGB = lchToHsluv(luvToLch(xyzToLuv(rgbToXyz([o.r/255,o.g/255,o.b/255]))));
+    
+  var l = oRGB.l.toPrecision(7),
+      u = oRGB.u.toPrecision(7),
+      v = oRGB.v.toPrecision(7);
 
   return new Hsluv(l,u,v, o.opacity);
 }
@@ -39,20 +41,22 @@ hsluvPrototype.darker = function(k) {
 };
 
 hsluvPrototype.rgb = function() {
-  var L = this.l,
-      U = this.u,
-      V = this.v,
+  var L = isNaN(this.l) ? 0 : this.l,
+      U = isNaN(this.u) ? 0 : this.u,
+      V = isNaN(this.v) ? 0 : this.v,
+      a = this.opacity,
       o = xyzToRgb(luvToXyz(lchToLuv((hsluvToLch([L,U,V]))))),
-      r = +o.r,
-      g = +o.g,
-      b = +o.b;
+      r = o.r,
+      g = o.g,
+      b = o.b;
 
-      return hsluv2rgb(r,g,b);
+      return hsluv2rgb(r,g,b,a);
 };
 
 hsluvPrototype.displayable = function() {
-  return (0 <= this.u && this.u <= 1 || isNaN(this.u))
-      && (0 <= this.v && this.v <= 1)
+  return (0 <= this.l && this.l <= 360 || isNaN(this.l))
+      && (0 <= this.u && this.u <= 100)
+      && (0 <= this.v && this.v <= 100)
       && (0 <= this.opacity && this.opacity <= 1);
 };
 
