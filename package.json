@@ -27,10 +27,10 @@
   "scripts": {
     "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -g d3-color:d3 -n d3 -o build/d3-hsluv.js -- index.js",
     "test": "tape 'test/**/*-test.js' && eslint index.js src test",
-     "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-hsluv.js -c -m -o build/d3-hsluv.min.js"
+    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-hsluv.js -c -m -o build/d3-hsluv.min.js"
   },
   "devDependencies": {
-    "eslint": "3",
+    "eslint": "5",
     "package-preamble": "0.0",
     "rollup": "0.41",
     "tape": "4",
