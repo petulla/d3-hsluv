@@ -22,9 +22,8 @@ tape("hsluv.toString() converts to RGB and formats as rgb(…) or rgba(…)", fu
   test.equal(d3_hsluv.hsluv("#abcdef") + "", "rgb(171, 205, 239)");
   test.equal(d3_hsluv.hsluv("moccasin") + "", "rgb(255, 228, 181)");
   test.equal(d3_hsluv.hsluv("rgb(12, 34, 56)") + "", "rgb(12, 34, 56)");
-  //test.equal(d3_hsluv.hsluv(d3_color.rgb(12, 34, 56)) + "", "rgb(12, 34, 56)");
-  //test.equal(d3_hsluv.hsluv(d3_hsluv.hsluv(60, 0.4, 0.0)) + "", "rgb(102, 102, 0)");
-  //test.equal(d3_hsluv.hsluv(d3_hsluv.hsluv(60, 0.4, 0.0, 0.4)) + "", "rgba(102, 102, 0, 0.4)");
+  test.equal(d3_hsluv.hsluv(d3_color.rgb("rgb(12, 34, 56)")) + "", "rgb(12, 34, 56)");
+  test.equal(d3_hsluv.hsluv(d3_hsluv.hsluv("rgba(102, 102, 0, 0.4)")) + "", "rgba(102, 102, 0, 0.4)");
   test.end();
 });
 
@@ -176,7 +175,7 @@ tape("hsluv.displayable() returns true if the color is within the RGB gamut and 
   test.equal(d3_hsluv.hsluv("red").displayable(), true);
   test.equal(d3_hsluv.hsluv("black").displayable(), true);
   test.equal(d3_hsluv.hsluv("invalid").displayable(), false);
-  test.equal(d3_hsluv.hsluv(NaN, NaN, 1).displayable(), false); 
+  test.equal(d3_hsluv.hsluv(NaN, NaN, 1).displayable(), false);
   test.equal(d3_hsluv.hsluv(120, -0.5, 0).displayable(), false);
   test.equal(d3_hsluv.hsluv(370, 1.5, 0).displayable(), false);
   test.equal(d3_hsluv.hsluv(0, 1, 1, 0).displayable(), true);
