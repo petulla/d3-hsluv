@@ -7,3 +7,9 @@ export var kappa = 903.2962962;
 export var epsilon = 0.0088564516;
 export var darker = 0.7;
 export var brighter = 1 / darker;
+
+export default function(x) {
+  return function() {
+    return x;
+  };
+}

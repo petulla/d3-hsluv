@@ -1,2 +1,2 @@
 export {default as hsluv} from "./src/hsluv";
-//export {default as interpolateHsluv, hsvLong as interpolateHsluvLong} from "./src/interpolateHsluv";
+export {default as interpolateHsluv, hsluvLong as interpolateHsluvLong} from "./src/interpolateHsluv";
