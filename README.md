@@ -29,10 +29,10 @@ Constructs a new [hsluv](http://www.hsluv.org/) color. The channel values are ex
 
 If *l*, *u* and *v* are specified, these represent the channel values of the returned color; an *opacity* may also be specified. If a CSS Color Module Level 3 *specifier* string is specified, it is parsed and then converted to the hsluv color space. See [d3.color](https://github.com/d3/d3-color#color) for examples. If a [*color*](https://github.com/d3/d3-color#color) instance is specified, it is converted to the RGB color space using [*color*.rgb](https://github.com/d3/d3-color#color_rgb) and then converted to hsluv.
 
-# d3.interpolateHsluv(a, b) <>
+<a href="#interpolateHsluv">#</a> d3.<b>interpolateHsluv</b>(<i>a</i>, <i>b</i>) [<>](https://github.com/d3/d3-hsluv/blob/master/src/interpolateHsluv.js "Source")<br>
 
 Returns an HSLuv color space interpolator between the two colors a and b. The colors a and b need not be in HSLuv; they will be converted to HSLuv using d3.hsluv. If either color’s hue or chroma is NaN, the opposing color’s channel value is used. The shortest path between hues is used. The return value of the interpolator is an RGB string.
 
-# d3.interpolateHsluvLong(a, b) <>
+<a href="#interpolateHsluvLong">#</a> d3.<b>interpolateHsluvLong</b>(<i>a</i>, <i>b</i>) [<>](https://github.com/d3/d3-hsluv/blob/master/src/interpolateHsluv.js "Source")<br>
 
 Like interpolateHsluv, but does not use the shortest path between hues.
