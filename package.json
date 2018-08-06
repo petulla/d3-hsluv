@@ -1,7 +1,7 @@
 {
   "name": "d3-hsluv",
   "version": "0.1.0",
-  "description": "HSLuv, the human-friendly HSl (Hue, Saturation, Lightness) color space.",
+  "description": "HSLuv, the human-friendly HSL (Hue, Saturation, Lightness) color space.",
   "keywords": [
     "d3",
     "d3-module",
