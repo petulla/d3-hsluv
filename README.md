@@ -1,6 +1,6 @@
 # d3-hsluv
 
-This module implements the [HSluv](http://www.hsluv.org/) (Hue, Saturation, Lightness) color space.
+This module implements the [HSLuv](http://www.hsluv.org/) (Hue, Saturation, Lightness) color space.
 
 
 ## Installing
