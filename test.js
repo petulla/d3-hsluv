@@ -1,14 +1,20 @@
 var d3 = require('d3');
 var hsluv = require('./build/d3-hsluv.js')
 
+var firstcolor = '#ffffe5';
+var secondcolor = "#993404";
 
-//var yellow = d3Color.rgb({l:85.87432021817473, u: 100.0000000000724, v: 97.13855934179674 });
-var color1 = hsluv.hsluv('#60c96e');
-var color2 = hsluv.hsluv('#4d4193');
-var breaks = 8;
+var color1 = hsluv.hsluv(firstcolor);
+var color2 = hsluv.hsluv(secondcolor);
 
-var color3 = d3.hsl('#60c96e');
-var color4 = d3.hsl('#4d4193');
+var breaks = 7;
+
+var color3 = d3.hsl(firstcolor);
+var color4 = d3.hsl(secondcolor);
+
+
+var color5 = d3.lab(firstcolor);
+var color6 = d3.lab(secondcolor);
 
 function rgbToHex(r,g,b) {
    return '#' + (r << 16 | g << 8 | b).toString(16).toUpperCase();
@@ -28,14 +34,26 @@ function getLessHSL(X) {
 	return '"' + rgbToHex(t.r,t.g,t.b) + '",';
 }
 
-for (var i = 0; i < breaks ; i++) {
+function getLessLAB(X) {
+	var t = d3.lab(color5.l + (X * ((color6.l - color5.l) / breaks)),
+		color5.a + (X * ((color6.a - color5.a) / breaks)),
+		color5.b + (X * ((color6.b - color5.b) / breaks))).rgb();
+	return '"' + rgbToHex(t.r,t.g,t.b) + '",';
+}
+
+for (var i = 0; i < breaks + 1 ; i++) {
 	console.log(getLess(i));
 }
 
 console.log(' ');
 
-for (var i = 0; i < breaks ; i++) {
+for (var i = 0; i < breaks + 1 ; i++) {
 	console.log(getLessHSL(i));
 }
 
+console.log(' ');
+
+for (var i = 0; i < breaks + 1 ; i++) {
+	console.log(getLessLAB(i));
+}
 //

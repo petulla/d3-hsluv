@@ -5,11 +5,10 @@ This module implements the [HSluv](http://www.hsluv.org/) (Hue, Saturation, Ligh
 
 ## Installing
 
-If you use NPM, `npm install d3-hsluv`. Otherwise, download the [latest release](https://github.com/d3/d3-hsluv/releases/latest). You can also load directly from [d3js.org](https://d3js.org) as a [standalone library](https://d3js.org/d3-hsluv.v0.1.min.js). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
+If you use NPM, `npm install d3-hsluv`. AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
 
 ```html
 <script src="https://d3js.org/d3-color.v1.min.js"></script>
-<script src="https://d3js.org/d3-hsluv.v0.1.min.js"></script>
 <script>
 
 var yellow = d3.hsluv("yellow"); // {l: 85.9, u: 100, v: 97.1, opacity: 1}
